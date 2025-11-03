@@ -60,6 +60,27 @@ const recipes = {
     "Cup of Salt": 1 / 3,      // 1 cup of salt per 3 fries
   },
 
+  //Vanilla Milkshake
+  "Vanilla Milkshake": {
+    "Glass of Milk": 1,
+    "Vanilla Ice Cream": 1,
+    "Vanilla" : 1,
+  },
+
+   //Chocolate Milkshake
+  "Chocolate Milkshake": {
+    "Glass of Milk": 1,
+    "Vanilla Ice Cream": 1,
+    "Chocolate Squares" : 2,
+  },
+
+  "Vanilla Ice Cream": {
+  "Cream": 1 / 2,
+  "Vanilla" : 4,
+  "Milk": 1,
+  "Cup of Sugar": 2
+  },
+
   // Raw ingredients (optional breakdown)
   // Each potato yields 3 slices, so one slice uses 1/3 of a Potato.
   "Sliced Potatoes": {
@@ -71,7 +92,19 @@ const recipes = {
   "Cup of Salt": {
     "Salt Bag": 1 / 5,
   },
-};
+  "Cup of flour": {
+    "Flour Bag" : 1 /5,
+  },
+  "Chocolate Squares": {
+    "Chocolate Bar": 1 / 5,
+  },
+  "Cup of Sugar": {
+    "Sugar Bag": 1 / 5,
+    },
+  "Glass of Milk": {
+    "Milk Carton": 1 / 5,
+  },
+}
 
 // Recursive function to calculate raw materials
 function calculateRawIngredients(item, quantity, totals = {}) {
@@ -129,8 +162,15 @@ document.getElementById("calculate").addEventListener("click", () => {
 window.addEventListener("DOMContentLoaded", () => {
   const recipeSelect = document.getElementById("recipe");
   Object.keys(recipes).forEach(recipeName => {
-    // Only show top-level cookable items
-    if (!["Bun", "Sausage", "Bread Dough", "Ketchup Cup", "Mustard Cup", "Pastry Dough", "Syrup", "Sliced Potatoes", "Cup of Oil", "Cup of Salt"].includes(recipeName)) {
+    // Only show top-level cookable items.
+    // Hide small raw ingredients and internal items that shouldn't be selectable by users.
+    const hidden = new Set([
+      "Bun", "Sausage", "Bread Dough", "Ketchup Cup", "Mustard Cup", "Pastry Dough", "Syrup", "Sliced Potatoes", "Cup of Oil", "Cup of Salt",
+      // Explicitly hide these raw/internal ingredients per user request:
+      "Cup of flour", "Chocolate Squares", "Cup of Sugar", "Glass of Milk"
+    ]);
+
+    if (!hidden.has(recipeName)) {
       const option = document.createElement("option");
       option.value = recipeName;
       option.textContent = recipeName;
