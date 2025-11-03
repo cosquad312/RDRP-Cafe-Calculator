@@ -62,14 +62,14 @@ const recipes = {
 
   //Vanilla Milkshake
   "Vanilla Milkshake": {
-    "Glass of Milk": 1,
+    "Cup of Milk": 1,
     "Vanilla Ice Cream": 1,
     "Vanilla" : 1,
   },
 
    //Chocolate Milkshake
   "Chocolate Milkshake": {
-    "Glass of Milk": 1,
+    "Cup of Milk": 1,
     "Vanilla Ice Cream": 1,
     "Chocolate Squares" : 2,
   },
@@ -101,10 +101,14 @@ const recipes = {
   "Cup of Sugar": {
     "Sugar Bag": 1 / 5,
     },
-  "Glass of Milk": {
+  "Cup of Milk": {
     "Milk Carton": 1 / 5,
   },
+  "Egg": {
+    "Egg Carton": 1 / 12,
+  },
 }
+
 
 // Recursive function to calculate raw materials
 function calculateRawIngredients(item, quantity, totals = {}) {
@@ -167,7 +171,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const hidden = new Set([
       "Bun", "Sausage", "Bread Dough", "Ketchup Cup", "Mustard Cup", "Pastry Dough", "Syrup", "Sliced Potatoes", "Cup of Oil", "Cup of Salt",
       // Explicitly hide these raw/internal ingredients per user request:
-      "Cup of flour", "Chocolate Squares", "Cup of Sugar", "Glass of Milk"
+      "Cup of flour", "Chocolate Squares", "Cup of Sugar", "Cup of Milk", "Egg"
     ]);
 
     if (!hidden.has(recipeName)) {
